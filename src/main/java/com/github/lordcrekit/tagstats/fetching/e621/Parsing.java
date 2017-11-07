@@ -25,8 +25,14 @@ class Parsing {
             pages[i] = new URI(WEB_ROOT + e.attr("href"));
         }
 
-        final Elements nextPage = doc.select("a.next_page");
-        final URI next = new URI(WEB_ROOT + nextPage.get(0).attr("href"));
+        final URI next;
+        Elements nextPage = doc.select("a.next_page");
+        if (nextPage != null && nextPage.size() > 0) {
+            next = new URI(WEB_ROOT + nextPage.get(0).attr("href"));
+        } else {
+            nextPage = doc.select("div[id=paginator] a");
+            next = new URI(WEB_ROOT + nextPage.get(1).attr("href"));
+        }
 
         return new BrowseParseResult(next, pages);
     }

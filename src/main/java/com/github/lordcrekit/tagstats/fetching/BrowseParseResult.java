@@ -36,7 +36,8 @@ public final class BrowseParseResult {
 
     public JSONObject toJSON() {
         final JSONObject out = new JSONObject();
-        out.put("Next", this.Next.toString());
+        if (this.Next != null)
+            out.put("Next", this.Next.toString());
 
         final JSONArray p = new JSONArray();
         for (int i = 0; i < this.Pages.length; i++)
