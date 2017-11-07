@@ -3,8 +3,9 @@ package com.github.lordcrekit.tagstats.fetching;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.Objects;
 
 public final class BrowseParseResult {
@@ -12,25 +13,25 @@ public final class BrowseParseResult {
     /**
      * The next browse page.
      */
-    public final URL Next;
+    public final URI Next;
 
     /**
      * The actual media pages linked to by this browse page.
      */
-    public final URL[] Pages;
+    public final URI[] Pages;
 
-    public BrowseParseResult(final URL next, final URL[] pages) {
+    public BrowseParseResult(final URI next, final URI[] pages) {
         this.Next = next;
         this.Pages = Objects.requireNonNull(pages);
     }
 
-    public BrowseParseResult(final JSONObject json) throws MalformedURLException {
-        this.Next = !json.has("Next") ? null : new URL(json.getString("Next"));
+    public BrowseParseResult(final JSONObject json) throws URISyntaxException {
+        this.Next = !json.has("Next") ? null : new URI(json.getString("Next"));
 
         final JSONArray p = json.getJSONArray("Pages");
-        this.Pages = new URL[p.length()];
+        this.Pages = new URI[p.length()];
         for (int i = 0; i < p.length(); i++)
-            this.Pages[i] = new URL(p.getString(i));
+            this.Pages[i] = new URI(p.getString(i));
     }
 
     public JSONObject toJSON() {
@@ -46,13 +47,13 @@ public final class BrowseParseResult {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         return o instanceof BrowseParseResult ? equals((BrowseParseResult) o) : false;
     }
 
-    public boolean equals(BrowseParseResult o) {
-        return Next == null ? o.Next == null : Next.equals(o.Next)
-                && Pages.equals(o.Pages);
+    public boolean equals(final BrowseParseResult o) {
+        return (Next == null ? o.Next == null : Next.equals(o.Next))
+                && Arrays.equals(Pages, o.Pages);
     }
 
     @Override

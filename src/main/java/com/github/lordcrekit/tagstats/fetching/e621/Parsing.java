@@ -6,7 +6,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
+import java.net.URI;
 
 /**
  * Parses pages on e621
@@ -19,14 +19,14 @@ class Parsing {
         final org.jsoup.nodes.Document doc = org.jsoup.Jsoup.parse(html);
 
         final Elements links = doc.select("div span.thumb a");
-        final URL[] pages = new URL[links.size()];
+        final URI[] pages = new URI[links.size()];
         for (int i = 0; i < links.size(); i++) {
             final Element e = links.get(i);
-            pages[i] = new URL(WEB_ROOT + e.attr("href"));
+            pages[i] = new URI(WEB_ROOT + e.attr("href"));
         }
 
         final Elements nextPage = doc.select("a.next_page");
-        final URL next = new URL(WEB_ROOT + nextPage.get(0).attr("href"));
+        final URI next = new URI(WEB_ROOT + nextPage.get(0).attr("href"));
 
         return new BrowseParseResult(next, pages);
     }
