@@ -23,6 +23,6 @@ public abstract class Tagable {
 
     @Override
     public String toString() {
-        return "T:" + Name;
+        return Name;
     }
 }

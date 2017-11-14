@@ -115,6 +115,9 @@ public class PageTest {
         Assert.assertNotEquals("Tags, one empty (fail)", o2, o1);
 
         o2 = new Page("Name", basicTags02);
+        System.out.println("?!");
+        System.out.println(o1.Tags);
+        System.out.println(o2.Tags);
         Assert.assertNotEquals("Tags, different (fail 1)", o1, o2);
         Assert.assertNotEquals("Tags, different (fail 2)", o2, o1);
         o2 = new Page("Name", basicTags01);

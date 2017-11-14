@@ -17,9 +17,6 @@ public final class Page {
             tempTags.put(e.getKey(), Collections.unmodifiableList(e.getValue()));
 
         this.Tags = Collections.unmodifiableMap(tempTags);
-
-        System.out.println(tags.toString());
-        System.out.println(Tags.toString());
     }
 
     public Page(final JSONObject json) {
@@ -73,26 +70,7 @@ public final class Page {
     }
 
     public boolean equals(Page o) {
-        if (!Title.equals(o.Title))
-            return false;
-
-        final Set<TagCategory> c = Tags.keySet();
-        final Set<TagCategory> oc = o.Tags.keySet();
-
-        if (!c.equals(oc)) {
-//            if (c.size() == 1 && oc.size() == 1) {
-//                System.out.println("okay...");
-//                if (!c.iterator().next().equals(oc.iterator().next())) {
-//                    System.out.println("dafuq" + c.iterator().next());
-//                    System.out.println("dafuq" + oc.iterator().next());
-//                    assert false; // What the fuck
-//                }
-//            }
-//            System.out.println(c.toString() + oc.toString());
-            return false;
-        }
-
-        return true;
+        return Title.equals(o.Title) && Tags.equals(o.Tags);
     }
 
     @Override
