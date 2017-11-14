@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 
 public class parsingTest {
 
-    /**
-     * It's too hard to do this by hand. Make sure you look over the results so that you know they are correct!
-     */
-    public static void generateParseBrowsingResults() {
+    @Test
+    public void testParsePage() {
+        System.out.println("Test parsePage(STRING)");
 
+        Assert.fail("Test this lol");
     }
 
     @Test

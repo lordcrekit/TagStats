@@ -34,6 +34,11 @@ public final class BrowseParseResult {
             this.Pages[i] = new URI(p.getString(i));
     }
 
+    /**
+     * Write this browse result to a JSON object.
+     *
+     * @return This as a JSON object.
+     */
     public JSONObject toJSON() {
         final JSONObject out = new JSONObject();
         if (this.Next != null)
@@ -52,7 +57,7 @@ public final class BrowseParseResult {
         return o instanceof BrowseParseResult ? equals((BrowseParseResult) o) : false;
     }
 
-    public boolean equals(final BrowseParseResult o) {
+    private boolean equals(final BrowseParseResult o) {
         return (Next == null ? o.Next == null : Next.equals(o.Next))
                 && Arrays.equals(Pages, o.Pages);
     }

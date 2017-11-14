@@ -1,6 +1,7 @@
 package com.github.lordcrekit.tagstats.fetching.e621;
 
 import com.github.lordcrekit.tagstats.fetching.BrowseParseResult;
+import com.github.lordcrekit.tagstats.fetching.Parser;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -11,7 +12,7 @@ import java.net.URI;
 /**
  * Parses pages on e621
  */
-class Parsing {
+class Parsing implements Parser {
 
     static final String WEB_ROOT = "https://e621.net";
 
